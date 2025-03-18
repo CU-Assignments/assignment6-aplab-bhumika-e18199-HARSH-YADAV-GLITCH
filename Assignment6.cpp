@@ -215,3 +215,91 @@ int main() {
     cout << endl;
     return 0;
 }
+
+// 8. Implement Stack using Queue
+#include <iostream>
+#include <stack>
+#include <deque>
+#include <vector>
+#include <queue>
+class StackUsingQueue {
+    queue<int> q;
+public:
+    void push(int x) {
+        q.push(x);
+        for (int i = 0; i < q.size() - 1; i++) {
+            q.push(q.front());
+            q.pop();
+        }
+    }
+    int pop() {
+        if (q.empty()) return -1;
+        int val = q.front();
+        q.pop();
+        return val;
+    }
+};
+
+// 13. Implement Stack using an Array
+#include <iostream>
+#include <stack>
+#include <deque>
+#include <vector>
+#include <queue>
+class StackUsingArray {
+    int arr[1000], topIdx;
+public:
+    StackUsingArray() : topIdx(-1) {}
+    void push(int x) { arr[++topIdx] = x; }
+    int pop() { return (topIdx >= 0) ? arr[topIdx--] : -1; }
+};
+
+// 14. Implement Queue using an Array
+#include <iostream>
+#include <stack>
+#include <deque>
+#include <vector>
+#include <queue>
+class QueueUsingArray {
+    int arr[1000], front, rear;
+public:
+    QueueUsingArray() : front(-1), rear(-1) {}
+    void enqueue(int x) { arr[++rear] = x; }
+    int dequeue() { return (front < rear) ? arr[++front] : -1; }
+};
+
+// 25. Implement Stack using Linked List
+#include <iostream>
+#include <stack>
+#include <deque>
+#include <vector>
+#include <queue>
+struct Node {
+    int data;
+    Node* next;
+};
+class StackUsingLinkedList {
+    Node* top;
+public:
+    StackUsingLinkedList() : top(nullptr) {}
+    void push(int x) { Node* n = new Node{x, top}; top = n; }
+    int pop() { if (!top) return -1; int val = top->data; top = top->next; return val; }
+};
+
+// 26. Implement Queue using Linked List
+#include <iostream>
+#include <stack>
+#include <deque>
+#include <vector>
+#include <queue>
+class QueueUsingLinkedList {
+    Node *front, *rear;
+public:
+    QueueUsingLinkedList() : front(nullptr), rear(nullptr) {}
+    void enqueue(int x) { Node* n = new Node{x, nullptr}; if (!rear) front = rear = n; else rear->next = n, rear = n; }
+    int dequeue() { if (!front) return -1; int val = front->data; front = front->next; return val; }
+};
+
+int main() {
+    return 0;
+}
